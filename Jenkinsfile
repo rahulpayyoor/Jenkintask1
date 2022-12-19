@@ -1,31 +1,40 @@
 pipeline {
     agent any
-    environment {
-        DOCKERHUB_CREDENTIALS = credentials('f89b0d95-5f9e-4869-bea3-734b58c5d9cd')
-    }
+ #   environment {
+ #       DOCKERHUB_CREDENTIALS = credentials('f89b0d95-5f9e-4869-bea3-734b58c5d9cd')
+ #  }
     stages {
-        stage('Build') {
-            steps {
-                sh 'docker build --tag jishnujoshy/pythonapp .'
+       stage("Git Checkout")
+        { 
+            steps
+            { 
+                git credentialsId: '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', url: 'https://github.com/rahulpayyoor/Jenkintask1.git' 
             }
         }
-        stage('Login to dockerhub') {
-            steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-            }
-        }
-        stage('push image') {
-            steps {
-                sh 'docker push jishnujoshy/pythonapp'
-            }
-        }
-         stage('Deploying the appto kubernetes') {
-             steps {
-                 script {
-                     kubernetesDeploy(configs: "deployment.yml", kubeconfigId: "5fcb4580-e2bb-47aa-96bc-16466402fc92")
-                 }
-             }
-         }
     }
 }
+#       stage('Build') {
+#            steps {
+#                sh 'docker build --tag jishnujoshy/pythonapp .'
+#            }
+#        }
+#        stage('Login to dockerhub') {
+#            steps {
+#                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+#            }
+#        }
+#        stage('push image') {
+#            steps {
+#                sh 'docker push jishnujoshy/pythonapp'
+#            }
+#        }
+#         stage('Deploying the appto kubernetes') {
+#             steps {
+#                 script {
+#                     kubernetesDeploy(configs: "deployment.yml", kubeconfigId: "5fcb4580-e2bb-47aa-96bc-16466402fc92")
+#                 }
+#             }
+#         }
+#    }
+#}
 
