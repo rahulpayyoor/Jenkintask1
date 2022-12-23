@@ -18,7 +18,7 @@ pipeline{
 		stage('Build') {
 
 			steps {
-				sh 'docker build -t rahulrampayyoor/dockertaskrep .'
+				sh 'docker build -tag rahulrampayyoor/dockertaskrep .'
 			}
 		}
 
