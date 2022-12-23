@@ -35,7 +35,7 @@ spec:
     spec:
       containers:
       - name: pythonappserver
-        image: jishnujoshy/pythonapp:latest
+        image: rahulrampayyoor/dockertaskrep:latest
         ports:
         - containerPort: 5000
       imagePullSecrets:
